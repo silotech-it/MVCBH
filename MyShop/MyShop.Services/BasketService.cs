@@ -74,7 +74,7 @@ namespace MyShop.Services
         public void AddToBasket(HttpContextBase httpContext, string productId)
         {
             Basket basket = GetBasket(httpContext, true);
-            BasketItem item = basket.BasketItems.FirstOrDefault(b => b.Id == productId);
+            BasketItem item = basket.BasketItems.FirstOrDefault(b => b.ProductId == productId);
 
             if (item == null)
             {
@@ -90,8 +90,8 @@ namespace MyShop.Services
             else
             {
                 item.Quantity = item.Quantity + 1;
-                basketContext.Commit();
             }
+            basketContext.Commit();
         }
 
         public void RemoveFromBasket(HttpContextBase httpContext, string itemId)
