@@ -1,25 +1,19 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyShop.Core.Contracts;
+﻿using MyShop.Core.Contracts;
 using MyShop.Core.Models;
-using MyShop.WebUI.Tests.Mocks;
 using MyShop.Services;
-using System.Linq;
 using MyShop.WebUI.Controllers;
+using MyShop.WebUI.Tests.Mocks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MyShop.WebUI.Tests.Controllers
+namespace TesteApp
 {
-    /// <summary>
-    /// Descrição resumida para BasketControllerTests
-    /// </summary>
-    [TestClass]
-    public class BasketControllerTests
+    class Program
     {
-
-        [TestMethod]
-        public void CanAddBasketItem()
+        static void Main(string[] args)
         {
             IRepository<Basket> baskets = new MockContext<Basket>();
             IRepository<Product> products = new MockContext<Product>();
@@ -31,11 +25,9 @@ namespace MyShop.WebUI.Tests.Controllers
             controller.ControllerContext = new System.Web.Mvc.ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller);
 
             //basketService.AddToBasket(httpContext, "1");
-            //controller.AddToBasket("1", httpContext);
+            controller.AddToBasket("1");
 
             Basket basket = baskets.Collection().FirstOrDefault();
-
-            Assert.IsNull(basket);
         }
     }
 }

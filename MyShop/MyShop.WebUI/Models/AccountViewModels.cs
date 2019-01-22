@@ -79,6 +79,26 @@ namespace MyShop.WebUI.Models
         [Display(Name = "Confirmar Senha")]
         [Compare("Password", ErrorMessage = "A senha e a senha de confirmação não correspondem.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Informe Primeiro Nome Apenas")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Informe Resto do Nome")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Informe Endereço")]
+        public string Street { get; set; }
+        [Required]
+        [Display(Name = "Informe Cidade")]
+        public string City { get; set; }
+        [Display(Name = "Informe Estado")]
+        public string State { get; set; }
+        [Required]
+        [Display(Name = "Informe CEP com barras")]
+        public string ZipCode { get; set; }
     }
 
     public class ResetPasswordViewModel

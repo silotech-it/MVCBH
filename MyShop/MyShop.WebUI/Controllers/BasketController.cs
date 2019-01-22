@@ -30,6 +30,12 @@ namespace MyShop.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult AddToBasket(string Id, HttpContextBase httpContext)
+        {
+            basketService.AddToBasket(httpContext, Id);
+            return RedirectToAction("Index");
+        }
+
         public ActionResult RemoveFromBasket(string Id)
         {
             basketService.RemoveFromBasket(this.HttpContext, Id);

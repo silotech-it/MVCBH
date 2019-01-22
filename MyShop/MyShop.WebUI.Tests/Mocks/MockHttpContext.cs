@@ -24,7 +24,7 @@ namespace MyShop.WebUI.Tests.Mocks
         {
             get
             {
-                return request;
+                return this.request;
             }
         }
 
@@ -32,7 +32,7 @@ namespace MyShop.WebUI.Tests.Mocks
         {
             get
             {
-                return response;
+                return this.response;
             }
         }
     }
@@ -50,7 +50,7 @@ namespace MyShop.WebUI.Tests.Mocks
         {
             get
             {
-                return cookies;
+                return this.cookies;
             }
         }
 
@@ -69,7 +69,7 @@ namespace MyShop.WebUI.Tests.Mocks
         {
             get
             {
-                return cookies;
+                return this.cookies;
             }
         }
     }
