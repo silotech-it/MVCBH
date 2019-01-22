@@ -20,7 +20,7 @@ namespace MyShop.Services
         public BasketService(IRepository<Product> ProductContext, IRepository<Basket> BasketContext)
         {
             this.basketContext = BasketContext;
-            this.productContext = productContext;
+            this.productContext = ProductContext;
         }
 
         private Basket GetBasket(HttpContextBase httpContext, bool createdIfNull)
