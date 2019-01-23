@@ -23,11 +23,13 @@ namespace MyShop.WebUI.Tests.Controllers
         {
             IRepository<Basket> baskets = new MockContext<Basket>();
             IRepository<Product> products = new MockContext<Product>();
+            IRepository<Order> orders = new MockContext<Order>();
 
             var httpContext = new MockHttpContext();
 
             IBasketService basketService = new BasketService(products, baskets);
-            var controller = new BasketController(basketService);
+            IOrderService orderService = new OrderService(orders);
+            var controller = new BasketController(basketService, orderService);
             controller.ControllerContext = new System.Web.Mvc.ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller);
 
             //basketService.AddToBasket(httpContext, "1");

@@ -1,4 +1,5 @@
 ﻿using MyShop.Core.Contracts;
+using MyShop.Core.Models;
 using MyShop.Services;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace MyShop.WebUI.Controllers
     public class BasketController : Controller
     {
         IBasketService basketService;
+        IOrderService orderService;
 
-        public BasketController(IBasketService BasketService)
+        public BasketController(IBasketService BasketService, IOrderService OrderService)
         {
             this.basketService = BasketService;
+            this.orderService = OrderService;
         }
 
         // GET: Basket
@@ -30,11 +33,11 @@ namespace MyShop.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddToBasket(string Id, HttpContextBase httpContext)
-        {
-            basketService.AddToBasket(httpContext, Id);
-            return RedirectToAction("Index");
-        }
+        //public ActionResult AddToBasket(string Id, HttpContextBase httpContext)
+        //{
+        //    basketService.AddToBasket(httpContext, Id);
+        //    return RedirectToAction("Index");
+        //}
 
         public ActionResult RemoveFromBasket(string Id)
         {
@@ -48,6 +51,31 @@ namespace MyShop.WebUI.Controllers
             return PartialView(basketViewSummary);
         }
 
+        public ActionResult Checkout()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult CheckOut(Order order)
+        {
+            var basketItems = basketService.GetBasketItems(this.HttpContext);
+            order.OrderStatus = "Order Created";
+
+            // payment
+
+            order.OrderStatus = "Payment Processed";
+            orderService.CreateOrder(order, basketItems);
+            basketService.ClearBasket(this.HttpContext);
+
+            return RedirectToAction("ThankYou", new { OrderId = order.Id });
+        }
+
+        public ActionResult ThankYou(string orderId)
+        {
+            ViewBag.OrderId = orderId;
+            return View();
+
+        }
     }
 }
