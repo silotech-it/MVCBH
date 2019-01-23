@@ -23,9 +23,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Gerenciar Produto", "Index", "ProductManager")</li>
-                    <li>@Html.ActionLink("Gerenciar Categoria", "Index", "ProductCategoryManager")</li>
-                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                    @if(Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Gerenciar Produto", "Index", "ProductManager")</li>
+                        <li>@Html.ActionLink("Gerenciar Categoria", "Index", "ProductCategoryManager")</li>
+                        <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
                 @{
